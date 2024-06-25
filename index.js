@@ -24,7 +24,10 @@ app.get('/user', async (req, res) => {
 })
 
 app.post('/user', async (req, res) => {
-  res.json({ok: 'yes'})
+  const body = req.body;
+  const { name, email, age } = req.body
+  console.log(name, email, age)
+  res.json({ ok: 'yes' })
 })
 
 // Promise version:
