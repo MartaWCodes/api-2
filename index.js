@@ -26,11 +26,15 @@ app.get('/user', async (req, res) => {
 app.post('/user', async (req, res) => {
   const body = req.body;
   const { name, email, age } = body
-  await pool.query(
-    "insert into users (name, email, age) values (?, ?, ?)",
-    [name, email, age]
-  );
-  res.status(204).send()
+  try {
+    await pool.query(
+      "insert into users (name, email, age) values (?, ?, ?)",
+      [name, email, age]
+    );
+    res.status(204).send()
+  } catch (err) {
+    res.status(500).json({ message: 'Problem' })
+  }
 })
 
 // Promise version:
