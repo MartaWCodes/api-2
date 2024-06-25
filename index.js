@@ -27,6 +27,9 @@ app.post('/user', async (req, res) => {
   const body = req.body;
   const { name, email, age } = body
   try {
+    // await pool.query(
+    //   `insert into users (name, email, age) values ("${name}", "${email}", ${age})` // SQL Injection, don't do it
+    // )
     await pool.query(
       "insert into users (name, email, age) values (?, ?, ?)",
       [name, email, age]
