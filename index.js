@@ -25,8 +25,11 @@ app.get('/user', async (req, res) => {
 
 app.post('/user', async (req, res) => {
   const body = req.body;
-  const { name, email, age } = req.body
-  console.log(name, email, age)
+  const { name, email, age } = body
+  await pool.query(
+    "insert into users (name, email, age) values (?, ?, ?)",
+    [name, email, age]
+  );
   res.json({ ok: 'yes' })
 })
 
