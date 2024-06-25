@@ -1,16 +1,9 @@
 const express = require('express');
-const mysql = require('mysql2/promise');
+const pool = require('./db/pool')
 
 // require('dotenv').config();
 
 const app = express();
-
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'customer'
-})
 
 app.use(express.json());
 
@@ -26,6 +19,10 @@ app.get('/user', async (req, res) => {
 app.post('/user', async (req, res) => {
   const body = req.body;
   const { name, email, age } = body
+  if (!name || !email || !age) {
+    res.status(400).json({message: 'Bad request'})
+    return
+  }
   try {
     // await pool.query(
     //   `insert into users (name, email, age) values ("${name}", "${email}", ${age})` // SQL Injection, don't do it
