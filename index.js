@@ -1,7 +1,8 @@
+require('dotenv').config();
+console.log(process.env)
+
 const express = require('express');
 const pool = require('./db/pool')
-
-// require('dotenv').config();
 
 const app = express();
 
