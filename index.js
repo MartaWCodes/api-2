@@ -23,6 +23,10 @@ app.get('/user', async (req, res) => {
   }
 })
 
+app.post('/user', async (req, res) => {
+  res.json({ok: 'yes'})
+})
+
 // Promise version:
 // app.get('/user', (req, res) => {
 //   // Return all entries from the users table in the DB
