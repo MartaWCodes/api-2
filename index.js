@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log(process.env)
 
 const express = require('express');
 const pool = require('./db/pool')
@@ -47,7 +46,7 @@ app.post('/user', async (req, res) => {
 //   })
 // });
 
-const port = 5000; // process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
