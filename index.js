@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 // require('dotenv').config();
 
@@ -14,13 +14,23 @@ const pool = mysql.createPool({
 
 app.use(express.json());
 
-app.get('/user', (req, res) => {
-  // Return all entries from the users table in the DB
-  pool.query('select * from users', (err, result) => {
-    res.json(result);
-    // TODO: err
-  })
-});
+app.get('/user', async (req, res) => {
+  try {
+    const [result] = await pool.query('select * from users')
+    res.json(result)
+  } catch (err) {
+    res.status(500).json({ message: 'Problem' })
+  }
+})
+
+// Promise version:
+// app.get('/user', (req, res) => {
+//   // Return all entries from the users table in the DB
+//   pool.query('select * from users', (err, result) => {
+//     res.json(result);
+//     // TODO: err
+//   })
+// });
 
 const port = 5000; // process.env.PORT || 5000;
 
