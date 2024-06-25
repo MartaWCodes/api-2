@@ -6,9 +6,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/user', (req, res) => {
+  // Return all entries from the users table in the DB
   res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+    message: 'TODO',
   });
 });
 
