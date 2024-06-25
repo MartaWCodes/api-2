@@ -30,7 +30,7 @@ app.post('/user', async (req, res) => {
     "insert into users (name, email, age) values (?, ?, ?)",
     [name, email, age]
   );
-  res.json({ ok: 'yes' })
+  res.status(204).send()
 })
 
 // Promise version:
